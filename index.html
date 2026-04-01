@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Physique-Chimie — Chapitres 10 & 11</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --paper: #fffffe;
+    --ink: #1a1614;
+    --accent: #c0392b;
+    --accent2: #2471a3;
+    --rule: #d9d0c4;
+    --soft: #f0ebe2;
+    --highlight: #fef9e7;
+    --green: #1e8449;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --display: 'Playfair Display', Georgia, serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); font-family: var(--serif); color: var(--ink); font-size: 15.5px; line-height: 1.75; }
+  header { background: var(--ink); color: #f5f0e8; padding: 3rem 2rem 2.5rem; text-align: center; position: relative; overflow: hidden; }
+  header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(255,255,255,.04) 28px, rgba(255,255,255,.04) 29px); }
+  header h1 { font-family: var(--display); font-size: 1.3rem; font-weight: 400; letter-spacing: .15em; text-transform: uppercase; opacity: .6; position: relative; }
+  header h2 { font-family: var(--display); font-size: 2.4rem; font-weight: 700; margin-top: .3rem; position: relative; }
+  nav { background: var(--paper); border-bottom: 2px solid var(--ink); display: flex; gap: 0; justify-content: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.08); flex-wrap: wrap; }
+  nav a { display: block; padding: .7rem 2rem; text-decoration: none; color: var(--ink); font-family: var(--display); font-size: .9rem; font-weight: 700; letter-spacing: .04em; border-right: 1px solid var(--rule); transition: background .15s; }
+  nav a:last-child { border-right: none; }
+  nav a:hover { background: var(--soft); }
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+  .chapitre { background: var(--paper); border: 1px solid var(--rule); border-radius: 2px; margin-bottom: 4rem; box-shadow: 0 1px 4px rgba(0,0,0,.06); overflow: hidden; }
+  .chapitre-header { background: var(--ink); color: #f5f0e8; padding: 1.5rem 2rem; display: flex; align-items: baseline; gap: 1rem; }
+  .chapitre-num { font-family: var(--display); font-size: 3rem; font-weight: 700; opacity: .25; line-height: 1; flex-shrink: 0; }
+  .chapitre-title { font-family: var(--display); font-size: 1.5rem; font-weight: 700; line-height: 1.2; }
+  .chapitre-body { padding: 2rem; }
+  .section-title { font-family: var(--display); font-size: 1.2rem; font-weight: 700; border-bottom: 2px solid var(--ink); padding-bottom: .3rem; margin: 2rem 0 1.2rem; display: flex; align-items: center; gap: .7rem; }
+  .section-title .rnum { background: var(--accent); color: #fff; font-family: var(--serif); font-size: .75rem; font-weight: 600; padding: .1rem .45rem; letter-spacing: .06em; border-radius: 1px; }
+  .subsection-title { font-family: var(--display); font-size: 1rem; font-weight: 700; font-style: italic; margin: 1.5rem 0 .7rem; color: var(--accent2); text-decoration: underline; text-underline-offset: 3px; }
+  .def-box { background: var(--highlight); border-left: 4px solid var(--accent); padding: 1rem 1.2rem; margin: .8rem 0 1.2rem; font-style: italic; }
+  .def-box strong { font-style: normal; }
+  .rule-box { background: #eaf4fb; border: 1px solid #aed6f1; border-left: 4px solid var(--accent2); padding: 1rem 1.2rem; margin: .8rem 0 1.2rem; }
+  .example-box { border: 1px solid var(--rule); background: var(--soft); padding: .9rem 1.2rem; margin: .8rem 0 1rem; font-size: .95rem; }
+  .example-box .label { font-family: var(--display); font-style: italic; font-size: .85rem; color: #666; margin-bottom: .3rem; }
+  p { margin-bottom: .75rem; }
+  ul, ol { margin: .5rem 0 .75rem 1.4rem; }
+  li { margin-bottom: .4rem; }
+  .schema-wrap { margin: 1.2rem 0; overflow-x: auto; }
+  .schema-transformation { display: flex; align-items: center; justify-content: center; gap: 0; font-size: .88rem; }
+  .schema-box { border: 1.5px solid var(--ink); padding: .7rem 1.1rem; text-align: center; min-width: 130px; background: var(--paper); }
+  .schema-box .box-title { font-weight: 700; border-bottom: 1px solid var(--rule); margin-bottom: .4rem; padding-bottom: .3rem; font-style: italic; }
+  .schema-arrow { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 .5rem; min-width: 90px; text-align: center; font-size: .8rem; color: #555; gap: .2rem; }
+  .arrow-line { width: 80px; height: 2px; background: var(--ink); position: relative; }
+  .arrow-line::after { content: ''; position: absolute; right: -1px; top: -4px; border-left: 8px solid var(--ink); border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+  svg.lentille-svg { display: block; max-width: 100%; margin: 0 auto; font-family: var(--serif); }
+  .eq { font-family: 'Courier New', monospace; background: #f4f4f4; border: 1px solid #ddd; padding: .5rem 1rem; display: inline-block; margin: .3rem 0; font-size: .93rem; border-radius: 2px; }
+  .eq sub, .eq sup { font-size: .72em; }
+  table { border-collapse: collapse; width: 100%; margin: .8rem 0 1rem; font-size: .9rem; }
+  th { background: var(--ink); color: #f5f0e8; padding: .5rem .8rem; text-align: left; font-family: var(--display); font-weight: 700; }
+  td { border: 1px solid var(--rule); padding: .45rem .8rem; vertical-align: top; }
+  tr:nth-child(even) td { background: var(--soft); }
+  ul.cours-list { list-style: none; margin-left: 0; }
+  ul.cours-list li { padding-left: 1.4rem; position: relative; margin-bottom: .5rem; }
+  ul.cours-list li::before { content: '•'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .formula-big { text-align: center; font-size: 1.5rem; font-family: var(--display); font-style: italic; margin: 1rem 0; padding: .8rem; background: var(--soft); border: 1px solid var(--rule); }
+  .fraction { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; font-size: 1rem; line-height: 1.2; }
+  .fraction span { display: block; text-align: center; }
+  .fraction .num { border-bottom: 1.5px solid var(--ink); padding-bottom: 1px; }
+  .kw { color: var(--accent); font-weight: 600; }
+  .kw2 { color: var(--accent2); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Physique-Chimie &middot; Seconde</h1>
+  <h2>Cours complet &mdash; Chapitres 10 &amp; 11</h2>
+</header>
+
+<nav>
+  <a href="#ch10">Chapitre 10 &mdash; Transformation chimique</a>
+  <a href="#ch11">Chapitre 11 &mdash; Lentilles minces convergentes</a>
+</nav>
+
+<main>
+
+<!-- CHAPITRE 10 -->
+<div class="chapitre" id="ch10">
+  <div class="chapitre-header">
+    <div class="chapitre-num">10</div>
+    <div class="chapitre-title">La transformation chimique</div>
+  </div>
+  <div class="chapitre-body">
+
+    <div class="section-title"><span class="rnum">I</span> La transformation chimique</div>
+
+    <div class="subsection-title">1) D&eacute;finition</div>
+    <div class="def-box">
+      La <strong>transformation chimique</strong> est le passage d&rsquo;un syst&egrave;me chimique de l&rsquo;<strong>&eacute;tat initial</strong> &agrave; l&rsquo;<strong>&eacute;tat final</strong>.
+    </div>
+
+    <p>Sch&eacute;ma de la transformation chimique :</p>
+    <div class="schema-wrap">
+      <div class="schema-transformation">
+        <div class="schema-box">
+          <div class="box-title">Etat <em>initial</em></div>
+          Esp&egrave;ces chimiques<br>introduites
+        </div>
+        <div class="schema-arrow">
+          <div style="font-size:.78rem;margin-bottom:.3rem;">transformation<br>chimique</div>
+          <div class="arrow-line"></div>
+        </div>
+        <div class="schema-box">
+          <div class="box-title">Etat <em>final</em></div>
+          Esp&egrave;ces chimiques<br>nouvelles et restantes
+        </div>
+      </div>
+    </div>
+
+    <div class="rule-box">
+      Une esp&egrave;ce chimique qui est <span class="kw">pr&eacute;sente</span> au cours de la r&eacute;action mais qui ne subit <span class="kw">aucun changement</span> est une <span class="kw">esp&egrave;ce spectatrice</span>.
+    </div>
+
+    <div class="subsection-title">2) Mod&eacute;lisation par la r&eacute;action chimique</div>
+    <p>Au cours d&rsquo;une transformation chimique :</p>
+    <ul class="cours-list">
+      <li>Les <span class="kw">r&eacute;actifs</span> sont les esp&egrave;ces chimiques <span class="kw">qui r&eacute;agissent</span>. Elles sont <span class="kw">consomm&eacute;es</span> partiellement ou totalement.</li>
+      <li>Les <span class="kw">produits</span> sont les esp&egrave;ces chimiques <span class="kw">form&eacute;es</span>. Elles sont <span class="kw">produites</span> au cours de la transformation.</li>
+    </ul>
+    <p>La <span class="kw">r&eacute;action chimique</span> mod&eacute;lise le passage des r&eacute;actifs aux produits :</p>
+    <div class="eq">r&eacute;actifs &rarr; produits</div>
+
+    <div class="example-box">
+      <div class="label">Exemple : R&eacute;action mod&eacute;lisant la combustion compl&egrave;te du m&eacute;thane</div>
+      <div class="eq">m&eacute;thane + dioxyg&egrave;ne &rarr; dioxyde de carbone + eau</div>
+    </div>
+
+    <div class="subsection-title">3) &Eacute;quation de la r&eacute;action</div>
+    <div class="def-box">
+      <strong>L&rsquo;&eacute;quation de la r&eacute;action chimique</strong> est l&rsquo;&eacute;criture symbolique d&rsquo;une r&eacute;action chimique, dans laquelle les esp&egrave;ces sont repr&eacute;sent&eacute;es par leur <strong>formule</strong> respective.
+    </div>
+    <p>L&rsquo;&eacute;criture d&rsquo;une &eacute;quation chimique repose sur deux principes :</p>
+    <ul class="cours-list">
+      <li>la <span class="kw">conservation des &eacute;l&eacute;ments chimiques</span> : il y a les m&ecirc;mes &eacute;l&eacute;ments et en m&ecirc;me nombre dans les r&eacute;actifs et dans les produits.</li>
+      <li>la <span class="kw">conservation de la charge &eacute;lectrique</span> : la somme des charges des r&eacute;actifs est &eacute;gale &agrave; la somme des charges des produits.</li>
+    </ul>
+    <p>Pour respecter ces lois, il faut <span class="kw">ajuster</span> les &eacute;quations chimiques en ajoutant les nombres devant les formules. Ces nombres sont appel&eacute;s les <span class="kw">nombres st&oelig;chiom&eacute;triques</span>.</p>
+
+    <div class="example-box">
+      <div class="label">Exemple n&deg;1 : Combustion compl&egrave;te du m&eacute;thane</div>
+      <div class="eq">CH<sub>4</sub> + 2&nbsp;O<sub>2</sub> &rarr; CO<sub>2</sub> + 2&nbsp;H<sub>2</sub>O</div>
+      <table style="margin-top:.8rem;">
+        <tr><th>R&eacute;actifs</th><th>Produits</th></tr>
+        <tr><td>1 &eacute;l&eacute;ment carbone<br>4 &eacute;l&eacute;ments hydrog&egrave;ne<br>4 &eacute;l&eacute;ments oxyg&egrave;ne</td>
+            <td>1 &eacute;l&eacute;ment carbone<br>4 &eacute;l&eacute;ments hydrog&egrave;ne<br>4 &eacute;l&eacute;ments oxyg&egrave;ne</td></tr>
+      </table>
+    </div>
+
+    <div class="example-box">
+      <div class="label">Exemple n&deg;2 : R&eacute;action entre le magn&eacute;sium m&eacute;tallique et les ions hydrog&egrave;ne H<sup>+</sup><sub>(aq)</sub></div>
+      <p style="margin:.3rem 0 .5rem;">magn&eacute;sium + ion hydrog&egrave;ne &rarr; ion magn&eacute;sium + dihydrog&egrave;ne</p>
+      <div class="eq">Mg + 2&nbsp;H<sup>+</sup> &rarr; Mg<sup>2+</sup> + H<sub>2</sub></div>
+      <table style="margin-top:.8rem;">
+        <tr><th>R&eacute;actifs</th><th>Produits</th></tr>
+        <tr><td>1 &eacute;l&eacute;ment magn&eacute;sium<br>2 &eacute;l&eacute;ments hydrog&egrave;ne<br>charges&nbsp;: 0 + 2(+1) = +2</td>
+            <td>1 &eacute;l&eacute;ment magn&eacute;sium<br>2 &eacute;l&eacute;ments hydrog&egrave;ne<br>charges&nbsp;: +2 + 0 = +2 &#10003;</td></tr>
+      </table>
+    </div>
+
+    <div class="subsection-title">Exercices : &eacute;quations chimiques &agrave; ajuster</div>
+    <ul class="cours-list">
+      <li><div class="eq">H<sub>2</sub> + Cl<sub>2</sub> &rarr; 2&nbsp;HCl</div></li>
+      <li><div class="eq">2&nbsp;Al + 3&nbsp;S &rarr; Al<sub>2</sub>S<sub>3</sub></div></li>
+      <li><div class="eq">2&nbsp;Mg + O<sub>2</sub> &rarr; 2&nbsp;MgO</div></li>
+      <li><div class="eq">C<sub>2</sub>H<sub>4</sub> + 2&nbsp;Cl<sub>2</sub> &rarr; 2&nbsp;C + 4&nbsp;HCl</div></li>
+      <li><div class="eq">H<sub>2</sub>SO<sub>4</sub> &rarr; H<sup>+</sup> + SO<sub>4</sub><sup>2&minus;</sup></div></li>
+      <li><div class="eq">2&nbsp;Ag<sup>+</sup> + Cu &rarr; 2&nbsp;Ag + Cu<sup>2+</sup></div></li>
+    </ul>
+
+    <div class="section-title"><span class="rnum">II</span> Le r&eacute;actif limitant d&rsquo;une transformation chimique</div>
+
+    <p>Une transformation chimique s&rsquo;arr&ecirc;te lorsqu&rsquo;au moins un des r&eacute;actifs est totalement consomm&eacute; : c&rsquo;est le <span class="kw">r&eacute;actif limitant</span>. Il &laquo;&nbsp;limite&nbsp;&raquo; la transformation par sa disparition.</p>
+
+    <div class="rule-box">
+      <p>Le <strong>r&eacute;actif limitant</strong> d&rsquo;une transformation chimique est <strong>le r&eacute;actif enti&egrave;rement consomm&eacute; en premier</strong>. Sa quantit&eacute; de mati&egrave;re est <strong>nulle</strong> &agrave; l&rsquo;&eacute;tat final.</p>
+      <p style="margin-top:.5rem;">Si <strong>tous les r&eacute;actifs sont enti&egrave;rement consomm&eacute;s</strong> &agrave; l&rsquo;&eacute;tat final, on dit qu&rsquo;ils ont &eacute;t&eacute; m&eacute;lang&eacute;s dans les <strong>proportions st&oelig;chiom&eacute;triques</strong>.</p>
+    </div>
+
+    <p>Pour trouver le r&eacute;actif limitant, on peut calculer le rapport de la quantit&eacute; de mati&egrave;re initiale des r&eacute;actifs sur leur nombre st&oelig;chiom&eacute;trique. Le r&eacute;actif limitant est celui pour lequel <strong>ce rapport est le plus petit</strong>.</p>
+
+    <div class="example-box">
+      <div class="label">M&eacute;thode</div>
+      Pour une r&eacute;action : <span class="eq">a A + b B &rarr; produits</span><br>
+      On compare <strong>n(A)/a</strong> et <strong>n(B)/b</strong>.<br>
+      Le r&eacute;actif limitant est celui pour lequel le rapport est <strong>minimal</strong>.
+    </div>
+
+    <div class="section-title"><span class="rnum">III</span> Effets thermiques d&rsquo;une transformation chimique</div>
+
+    <div class="rule-box">
+      <ul class="cours-list">
+        <li>Une transformation chimique est dite <span class="kw">exothermique</span> si elle <strong>lib&egrave;re de l&rsquo;&eacute;nergie</strong> vers le milieu ext&eacute;rieur. <em>Exemples : combustion du carbone, du gaz de ville.</em></li>
+        <li>Une transformation chimique est dite <span class="kw">endothermique</span> si elle <strong>absorbe de l&rsquo;&eacute;nergie</strong> de la part du milieu ext&eacute;rieur. <em>Exemple : production d&rsquo;eau &agrave; partir du dihydrog&egrave;ne et du dioxyg&egrave;ne.</em></li>
+      </ul>
+    </div>
+
+    <div class="def-box">
+      Si on augmente la masse du r&eacute;actif limitant, on augmente la quantit&eacute; de produits form&eacute;s et donc <strong>l&rsquo;&eacute;nergie absorb&eacute;e ou lib&eacute;r&eacute;e</strong> par la transformation.
+    </div>
+
+  </div>
+</div>
+
+
+<!-- CHAPITRE 11 -->
+<div class="chapitre" id="ch11">
+  <div class="chapitre-header">
+    <div class="chapitre-num">11</div>
+    <div class="chapitre-title">Les lentilles minces convergentes</div>
+  </div>
+  <div class="chapitre-body">
+
+    <div class="section-title"><span class="rnum">I</span> Les diff&eacute;rentes lentilles minces</div>
+
+    <div class="subsection-title">1) D&eacute;finition d&rsquo;une lentille</div>
+    <div class="def-box">
+      Une <strong>lentille</strong> est un solide constitu&eacute; d&rsquo;un mat&eacute;riau transparent (verre ou mati&egrave;re plastique), d&eacute;limit&eacute; par deux faces dont l&rsquo;une au moins est <strong>courb&eacute;e</strong>.
+    </div>
+    <p><em>Exemples de lentilles :</em> lunettes de vue, lentilles de contact, loupe, appareil photo, t&eacute;lescope&hellip;</p>
+    <p>On parle de lentilles <span class="kw">minces</span> si l&rsquo;&eacute;paisseur du milieu de la lentille est tr&egrave;s inf&eacute;rieure aux rayons des surfaces courbes.</p>
+
+    <div class="rule-box">
+      Un rayon lumineux est d&eacute;vi&eacute; lorsqu&rsquo;il traverse la lentille par <span class="kw">r&eacute;fraction</span> (deux r&eacute;fractions : une &agrave; l&rsquo;entr&eacute;e, une &agrave; la sortie). Pour une lentille mince, on assimile ces deux r&eacute;fractions &agrave; <strong>une seule d&eacute;viation</strong>.
+    </div>
+
+    <!-- Schéma lentilles convergentes / divergentes -->
+    <div class="schema-wrap" style="background:var(--soft);padding:1rem;border:1px solid var(--rule);">
+      <svg viewBox="0 0 500 110" class="lentille-svg" height="110">
+        <!-- Label gauche -->
+        <text x="100" y="100" text-anchor="middle" font-size="12" fill="#333" font-style="italic">Bords minces (convergentes)</text>
+        <!-- 3 lentilles convergentes -->
+        <path d="M30,15 Q52,55 30,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M55,15 Q33,55 55,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M78,15 Q100,55 78,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M103,15 Q81,55 103,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M125,15 Q147,55 125,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M150,15 Q128,55 150,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+
+        <!-- Séparateur -->
+        <line x1="215" y1="5" x2="215" y2="100" stroke="#bbb" stroke-width="1" stroke-dasharray="4,3"/>
+
+        <!-- Label droite -->
+        <text x="370" y="100" text-anchor="middle" font-size="12" fill="#333" font-style="italic">Bords &eacute;pais (divergentes)</text>
+        <!-- 3 lentilles divergentes -->
+        <path d="M240,15 Q218,55 240,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M265,15 Q287,55 265,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M288,15 Q266,55 288,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M313,15 Q335,55 313,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M338,15 Q316,55 338,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+        <path d="M363,15 Q385,55 363,95" fill="none" stroke="#1a1614" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="rule-box">
+      Il existe deux types de lentilles minces :
+      <ul class="cours-list" style="margin-top:.5rem">
+        <li>Les lentilles minces <span class="kw">convergentes</span> : elles ont un bord plus fin que le centre et elles <strong>grossissent la taille d&rsquo;un texte</strong> vu &agrave; travers.</li>
+        <li>Les lentilles minces <span class="kw">divergentes</span> : elles ont un bord plus &eacute;pais que leur centre et elles <strong>diminuent la taille d&rsquo;un texte</strong> vu &agrave; travers.</li>
+      </ul>
+    </div>
+    <p><em>Dans la suite du chapitre, on ne s&rsquo;int&eacute;ressera qu&rsquo;aux lentilles minces convergentes.</em></p>
+
+    <div class="section-title"><span class="rnum">II</span> Les lentilles minces convergentes</div>
+
+    <div class="subsection-title">1) Les caract&eacute;ristiques d&rsquo;une lentille mince convergente</div>
+    <p>Une lentille mince convergente est repr&eacute;sent&eacute;e par une <strong>double fl&egrave;che</strong>. Elle est caract&eacute;ris&eacute;e par :</p>
+    <ul class="cours-list">
+      <li>son <span class="kw">centre optique O</span> &mdash; au centre de la double fl&egrave;che ;</li>
+      <li>son <span class="kw">axe optique</span> &mdash; not&eacute; &Delta; (&laquo;&nbsp;delta&nbsp;&raquo; majuscule) : axe de sym&eacute;trie de la lentille, perpendiculaire &agrave; elle et passant par le centre optique ;</li>
+      <li>son <span class="kw">foyer objet F</span> &mdash; situ&eacute; sur l&rsquo;axe optique &agrave; gauche du centre optique ; sa position est une caract&eacute;ristique de la capacit&eacute; de &laquo;&nbsp;zoom&nbsp;&raquo; de la lentille ;</li>
+      <li>son <span class="kw">foyer image F&prime;</span> &mdash; sym&eacute;trique de F par rapport &agrave; O.</li>
+    </ul>
+    <p><em>Attention : la distance focale f&prime; se note avec une minuscule. Le foyer image F&prime; est un point qui se note avec une majuscule.</em></p>
+
+    <!-- Schéma lentille avec F O F' -->
+    <div class="schema-wrap" style="background:var(--soft);padding:1.2rem;border:1px solid var(--rule);">
+      <svg viewBox="0 0 560 130" class="lentille-svg" height="130">
+        <!-- axe optique -->
+        <line x1="15" y1="65" x2="545" y2="65" stroke="#444" stroke-width="1.3"/>
+        <text x="530" y="58" font-size="11" fill="#2471a3" font-style="italic">axe &#916;</text>
+
+        <!-- lentille double flèche -->
+        <line x1="280" y1="10" x2="280" y2="120" stroke="#1a1614" stroke-width="2.5"/>
+        <polygon points="280,6 274,22 286,22" fill="#1a1614"/>
+        <polygon points="280,124 274,108 286,108" fill="#1a1614"/>
+        <text x="287" y="73" font-size="12" font-weight="bold">O</text>
+
+        <!-- F -->
+        <circle cx="168" cy="65" r="4" fill="#c0392b"/>
+        <text x="157" y="82" font-size="12" fill="#c0392b" font-weight="bold">F</text>
+        <text x="100" y="55" font-size="10" fill="#c0392b" font-style="italic">foyer objet</text>
+
+        <!-- F' -->
+        <circle cx="392" cy="65" r="4" fill="#2471a3"/>
+        <text x="396" y="82" font-size="12" fill="#2471a3" font-weight="bold">F&prime;</text>
+        <text x="385" y="55" font-size="10" fill="#2471a3" font-style="italic">foyer image</text>
+
+        <!-- f' label -->
+        <line x1="280" y1="105" x2="392" y2="105" stroke="#2471a3" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="318" y="118" font-size="10" fill="#2471a3" font-style="italic">f &prime; = OF&prime;</text>
+
+        <!-- OF label -->
+        <line x1="168" y1="105" x2="280" y2="105" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="196" y="118" font-size="10" fill="#c0392b" font-style="italic">OF = &minus;f &prime;</text>
+      </svg>
+    </div>
+
+    <div class="subsection-title">2) Trac&eacute; des trois rayons particuliers traversant une lentille mince convergente</div>
+    <p>Pour construire g&eacute;om&eacute;triquement une image &agrave; partir d&rsquo;un objet et d&rsquo;une lentille, il faut ma&icirc;triser le chemin de trois rayons particuliers &eacute;mis par l&rsquo;objet et traversant la lentille.</p>
+
+    <!-- Rayon 1 -->
+    <div class="rule-box" style="margin-bottom:.8rem;">
+      <strong>Rayon 1 :</strong> Le rayon qui passe par le <span class="kw2">centre optique O</span> n&rsquo;est <strong>pas d&eacute;vi&eacute;</strong> ; il continue en ligne droite.
+    </div>
+    <div class="schema-wrap" style="background:var(--soft);padding:.8rem;border:1px solid var(--rule);">
+      <svg viewBox="0 0 480 80" class="lentille-svg" height="80">
+        <line x1="10" y1="40" x2="470" y2="40" stroke="#bbb" stroke-width="1"/>
+        <line x1="240" y1="5" x2="240" y2="75" stroke="#1a1614" stroke-width="2"/>
+        <polygon points="240,2 234,16 246,16" fill="#1a1614"/>
+        <polygon points="240,78 234,64 246,64" fill="#1a1614"/>
+        <text x="246" y="48" font-size="11" font-weight="bold">O</text>
+        <circle cx="155" cy="40" r="3" fill="#c0392b"/><text x="147" y="34" font-size="10" fill="#c0392b">F</text>
+        <circle cx="325" cy="40" r="3" fill="#2471a3"/><text x="328" y="34" font-size="10" fill="#2471a3">F&prime;</text>
+        <!-- rayon non dévié passant par O -->
+        <line x1="50" y1="8" x2="430" y2="72" stroke="#e74c3c" stroke-width="2"/>
+        <polygon points="430,72 416,66 420,78" fill="#e74c3c"/>
+      </svg>
+    </div>
+
+    <!-- Rayon 2 -->
+    <div class="rule-box" style="margin-bottom:.8rem;">
+      <strong>Rayon 2 :</strong> Tout rayon qui arrive <span class="kw2">parall&egrave;le &agrave; l&rsquo;axe optique</span> ressort de la lentille en passant par <span class="kw2">F&prime;</span>.
+    </div>
+    <div class="schema-wrap" style="background:var(--soft);padding:.8rem;border:1px solid var(--rule);">
+      <svg viewBox="0 0 480 80" class="lentille-svg" height="80">
+        <line x1="10" y1="40" x2="470" y2="40" stroke="#bbb" stroke-width="1"/>
+        <line x1="240" y1="5" x2="240" y2="75" stroke="#1a1614" stroke-width="2"/>
+        <polygon points="240,2 234,16 246,16" fill="#1a1614"/>
+        <polygon points="240,78 234,64 246,64" fill="#1a1614"/>
+        <text x="246" y="48" font-size="11" font-weight="bold">O</text>
+        <circle cx="155" cy="40" r="3" fill="#c0392b"/><text x="147" y="34" font-size="10" fill="#c0392b">F</text>
+        <circle cx="325" cy="40" r="3" fill="#2471a3"/><text x="328" y="34" font-size="10" fill="#2471a3">F&prime;</text>
+        <!-- rayon parallèle puis convergent vers F' -->
+        <line x1="40" y1="16" x2="240" y2="16" stroke="#e74c3c" stroke-width="2"/>
+        <line x1="240" y1="16" x2="440" y2="72" stroke="#e74c3c" stroke-width="2"/>
+        <polygon points="440,72 424,64 430,76" fill="#e74c3c"/>
+      </svg>
+    </div>
+    <p><em>Remarque : Tous les rayons lumineux sont concentr&eacute;s en un seul point qui peut devenir tr&egrave;s chaud, d&rsquo;o&ugrave; le nom de &laquo;&nbsp;point focal&nbsp;&raquo;. Il est m&ecirc;me possible d&rsquo;enflammer une feuille de papier avec une grosse lentille convergente comme une loupe&nbsp;!</em></p>
+
+    <!-- Rayon 3 -->
+    <div class="rule-box" style="margin-bottom:.8rem;">
+      <strong>Rayon 3 :</strong> Tout rayon qui passe par le <span class="kw2">foyer objet F</span> ressort de la lentille <span class="kw2">parall&egrave;le &agrave; l&rsquo;axe optique</span>.
+    </div>
+    <div class="schema-wrap" style="background:var(--soft);padding:.8rem;border:1px solid var(--rule);">
+      <svg viewBox="0 0 480 80" class="lentille-svg" height="80">
+        <line x1="10" y1="40" x2="470" y2="40" stroke="#bbb" stroke-width="1"/>
+        <line x1="240" y1="5" x2="240" y2="75" stroke="#1a1614" stroke-width="2"/>
+        <polygon points="240,2 234,16 246,16" fill="#1a1614"/>
+        <polygon points="240,78 234,64 246,64" fill="#1a1614"/>
+        <text x="246" y="48" font-size="11" font-weight="bold">O</text>
+        <circle cx="155" cy="40" r="3" fill="#c0392b"/><text x="147" y="34" font-size="10" fill="#c0392b">F</text>
+        <circle cx="325" cy="40" r="3" fill="#2471a3"/><text x="328" y="34" font-size="10" fill="#2471a3">F&prime;</text>
+        <!-- rayon passant par F puis parallèle -->
+        <line x1="40" y1="66" x2="240" y2="16" stroke="#e74c3c" stroke-width="2"/>
+        <line x1="240" y1="16" x2="440" y2="16" stroke="#e74c3c" stroke-width="2"/>
+        <polygon points="440,16 425,10 425,22" fill="#e74c3c"/>
+      </svg>
+    </div>
+
+    <div class="subsection-title">3) Construction graphique d&rsquo;une image</div>
+    <p>Lorsque l&rsquo;on place un <span class="kw">objet AB</span> devant une lentille, les rayons venant de cet objet et traversant la lentille vont alors former une <span class="kw">image A&prime;B&prime;</span>.</p>
+    <p>Pour obtenir une image nette, il est n&eacute;cessaire de placer un <span class="kw">&eacute;cran</span> &agrave; l&rsquo;endroit o&ugrave; elle se forme.</p>
+    <p>On se limite &agrave; la construction de l&rsquo;image d&rsquo;un objet AB perpendiculaire &agrave; l&rsquo;axe optique. L&rsquo;image A&prime;B&prime; est elle aussi perpendiculaire &agrave; l&rsquo;axe optique. L&rsquo;image B&prime; se trouve &agrave; l&rsquo;intersection des trois rayons particuliers.</p>
+
+    <!-- Construction complète -->
+    <div class="schema-wrap" style="background:var(--soft);padding:1rem;border:1px solid var(--rule);">
+      <svg viewBox="0 0 560 200" class="lentille-svg" height="200">
+        <defs>
+          <pattern id="grid2" width="14" height="14" patternUnits="userSpaceOnUse">
+            <path d="M 14 0 L 0 0 0 14" fill="none" stroke="#ddd" stroke-width=".5"/>
+          </pattern>
+        </defs>
+        <rect width="560" height="200" fill="url(#grid2)"/>
+
+        <!-- axe optique -->
+        <line x1="10" y1="100" x2="550" y2="100" stroke="#333" stroke-width="1.5"/>
+        <text x="520" y="93" font-size="10" fill="#333" font-style="italic">axe opt.</text>
+
+        <!-- Lentille -->
+        <line x1="310" y1="18" x2="310" y2="182" stroke="#1a1614" stroke-width="2.5"/>
+        <polygon points="310,14 303,30 317,30" fill="#1a1614"/>
+        <polygon points="310,186 303,170 317,170" fill="#1a1614"/>
+        <text x="316" y="110" font-size="11" font-weight="bold">O</text>
+
+        <!-- F et F' -->
+        <circle cx="200" cy="100" r="4" fill="#c0392b"/>
+        <text x="188" y="116" font-size="11" fill="#c0392b" font-weight="bold">F</text>
+        <circle cx="420" cy="100" r="4" fill="#2471a3"/>
+        <text x="424" y="116" font-size="11" fill="#2471a3" font-weight="bold">F&prime;</text>
+
+        <!-- Objet AB -->
+        <line x1="90" y1="100" x2="90" y2="44" stroke="#1e8449" stroke-width="2.5"/>
+        <polygon points="90,40 84,56 96,56" fill="#1e8449"/>
+        <text x="62" y="112" font-size="11" fill="#1e8449" font-weight="bold">A</text>
+        <text x="94" y="40" font-size="11" fill="#1e8449" font-weight="bold">B</text>
+
+        <!--
+          3 rayons de B(90,44) :
+          Rayon 1 (par O) : B(90,44) → O(310,100) → prolongé
+            pente = (100-44)/(310-90) = 56/220 = 0.2545
+            à x=530 : 100 + 0.2545*(530-310) = 100+56 = 156
+          Rayon 2 (parallèle → F') : B horizontal jusqu'à lentille (310,44) → vers F'(420,100) prolongé
+            pente après lentille = (100-44)/(420-310) = 56/110 = 0.509
+            à x=530 : 44 + 0.509*(530-310) = 44 + 112 = 156
+          Rayon 3 (par F → parallèle) : B(90,44) → F(200,100) → prolongé à lentille, puis horizontal
+            pente = (100-44)/(200-90) = 56/110 = 0.509
+            à x=310 : 44 + 0.509*(310-90) = 44 + 112 = 156
+            puis horizontal à y=156 de x=310 →
+          Intersection : (≈530, 156) — mais en pratique avec 2 rayons suffisent
+          Simplifions : intersection à (480, ~148)
+        -->
+
+        <!-- Rayon 1 : par O (non dévié) -->
+        <line x1="90" y1="44" x2="530" y2="156" stroke="#e74c3c" stroke-width="1.8"/>
+
+        <!-- Rayon 2 : parallèle puis par F' -->
+        <line x1="90" y1="44" x2="310" y2="44" stroke="#e67e22" stroke-width="1.8"/>
+        <line x1="310" y1="44" x2="530" y2="156" stroke="#e67e22" stroke-width="1.8"/>
+
+        <!-- Rayon 3 : par F puis parallèle -->
+        <!-- pente B→F : (100-44)/(200-90)=56/110 ; à x=310 : 44+56/110*(310-90)=44+112=156 -->
+        <line x1="90" y1="44" x2="310" y2="156" stroke="#8e44ad" stroke-width="1.8"/>
+        <line x1="310" y1="156" x2="530" y2="156" stroke="#8e44ad" stroke-width="1.8"/>
+
+        <!-- Image A'B' à x=530, de y=100 à y=156 (renversée) -->
+        <line x1="530" y1="100" x2="530" y2="156" stroke="#1a1614" stroke-width="2.5"/>
+        <polygon points="530,160 524,144 536,144" fill="#1a1614"/>
+        <text x="536" y="110" font-size="11" font-weight="bold">A&prime;</text>
+        <text x="536" y="160" font-size="11" font-weight="bold">B&prime;</text>
+      </svg>
+    </div>
+
+    <div class="rule-box">
+      <ul class="cours-list">
+        <li>L&rsquo;image A&prime;B&prime; obtenue est <span class="kw">renvers&eacute;e</span>.</li>
+        <li>L&rsquo;image A&prime;B&prime; est dite <span class="kw">r&eacute;elle</span> car elle est situ&eacute;e <strong>apr&egrave;s</strong> la lentille ; elle est observable sur un &eacute;cran plac&eacute; en A&prime;B&prime;.</li>
+        <li>Plus un objet se rapproche de la lentille, plus son image est <span class="kw">grande</span> et plus elle <span class="kw">s&rsquo;&eacute;loigne</span> de la lentille.</li>
+      </ul>
+    </div>
+
+    <div class="subsection-title">4) Le grandissement</div>
+    <p>Pour comparer la taille et l&rsquo;orientation de l&rsquo;image &agrave; celles de l&rsquo;objet, on utilise le <span class="kw">grandissement</span>.</p>
+
+    <div class="def-box">
+      Le <strong>grandissement</strong> se note par la lettre grecque &laquo;&nbsp;gamma&nbsp;&raquo; not&eacute;e <strong>&#947;</strong>. Il est &eacute;gal au <strong>rapport entre la taille de l&rsquo;image et la taille de l&rsquo;objet</strong>. Il n&rsquo;a <strong>pas d&rsquo;unit&eacute;</strong>.
+    </div>
+
+    <div class="formula-big">
+      &#947; =
+      <span class="fraction">
+        <span class="num">A&prime;B&prime;</span>
+        <span>AB</span>
+      </span>
+      &nbsp;=&nbsp;
+      <span class="fraction">
+        <span class="num">&#x0305;OA&prime;</span>
+        <span>&#x0305;OA</span>
+      </span>
+    </div>
+
+    <p><em>Remarque : Les distances doivent &ecirc;tre dans la m&ecirc;me unit&eacute; (m toutes les deux ou cm toutes les deux).</em></p>
+
+    <div class="rule-box">
+      <ul class="cours-list">
+        <li>Si <strong>|&#947;| &gt; 1</strong>, alors l&rsquo;image est <span class="kw">plus grande que l&rsquo;objet</span> (A&prime;B&prime; &gt; AB).</li>
+        <li>Si <strong>|&#947;| &lt; 1</strong>, alors l&rsquo;image est <span class="kw">plus petite que l&rsquo;objet</span> (A&prime;B&prime; &lt; AB).</li>
+        <li>Si <strong>&#947; &lt; 0</strong>, l&rsquo;image est <span class="kw">renvers&eacute;e</span> par rapport &agrave; l&rsquo;objet.</li>
+        <li>Si <strong>&#947; &gt; 0</strong>, l&rsquo;image est <span class="kw">dans le m&ecirc;me sens</span> que l&rsquo;objet.</li>
+      </ul>
+      <p style="margin-top:.5rem;">Le <strong>th&eacute;or&egrave;me de Thal&egrave;s</strong> permet de retrouver facilement la relation de grandissement (triangles semblables form&eacute;s par les rayons).</p>
+    </div>
+
+    <div class="example-box">
+      <div class="label">Exercice</div>
+      <p>L&rsquo;image d&rsquo;un objet situ&eacute;e &agrave; une distance OA = 15,0&nbsp;cm d&rsquo;une lentille est form&eacute;e &agrave; une distance OA&prime; = 30,0&nbsp;cm. Calculer le grandissement de la lentille.</p>
+      <p style="margin-top:.6rem;"><strong>Solution :</strong></p>
+      <p>&#947; = OA&prime; / OA = (+30,0) / (&minus;15,0) = <strong>&minus;2</strong></p>
+      <p>|&#947;| = 2 &gt; 1 &rarr; l&rsquo;image est 2 fois plus grande que l&rsquo;objet.<br>
+      &#947; &lt; 0 &rarr; l&rsquo;image est renvers&eacute;e.</p>
+      <p><em>(OA est n&eacute;gatif car l&rsquo;objet est &agrave; gauche de la lentille dans la convention alg&eacute;brique.)</em></p>
+    </div>
+
+  </div>
+</div>
+
+</main>
+</body>
+</html>
